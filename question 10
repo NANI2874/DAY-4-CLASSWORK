@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <string.h>
+
+union my_union {
+    int integer;
+    char string[50];
+};
+
+int main() {
+    union my_union myValue;
+
+    printf("Enter a value: ");
+    if (scanf("%d", &myValue.integer) == 1) {
+        printf("You entered an integer: %d\n", myValue.integer);
+    } else {
+        scanf("%s", myValue.string);
+        printf("You entered a string: %s\n", myValue.string);
+    }
+
+    return 0;
+}
