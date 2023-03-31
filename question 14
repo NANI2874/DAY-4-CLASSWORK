@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+struct point {
+    int x;
+    int y;
+};
+
+struct circle {
+    float radius;
+    struct point center;
+};
+
+float area_of_circle(struct circle c) {
+    float area = 3.14159 * c.radius * c.radius;
+    return area;
+}
+
+int main() {
+    struct circle c1 = { 5.0, { 0, 0 } };
+    float area = area_of_circle(c1);
+    printf("Circle with radius %f and center (%d, %d) has an area of %f\n",
+           c1.radius, c1.center.x, c1.center.y, area);
+    return 0;
+}
