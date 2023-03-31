@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+typedef union {
+    float f;
+    int i;
+} float_int_union;
+
+typedef struct {
+    char type[10];
+    float_int_union dim1;
+    float_int_union dim2;
+} shape;
+
+float rectangle_area(float_int_union dim1, float_int_union dim2) {
+    return dim1.f * dim2.f;
+}
+
+float circle_area(float_int_union dim1) {
+    return M_PI * pow(dim1.f, 2);
+}
+
+float triangle_area(float_int_union dim1, float_int_union dim2) {
+    return 0.5 * dim1.f * dim2.f;
+}
+
+int main() {
+    shape s;
+    float area;
+
+    printf("Enter shape type (rectangle, circle, triangle): ");
+    scanf("%s", s.type);
+
+    if (strcmp(s.type, "rectangle") == 0) {
+        printf("Enter length: ");
+        scanf("%f", &s.dim1.f);
+        printf("Enter width: ");
+        scanf("%f", &s.dim2.f);
+        area = rectangle_area(s.dim1, s.dim2);
+    }
+    else if (strcmp(s.type, "circle") == 0) {
+        printf("Enter radius: ");
+        scanf("%f", &s.dim1.f);
+        area = circle_area(s.dim1);
+    }
+    else if (strcmp(s.type, "triangle") == 0) {
+        printf("Enter base: ");
+        scanf("%f", &s.dim1.f);
+        printf("Enter height: ");
+        scanf("%f", &s.dim2.f);
+        area = triangle_area(s.dim1, s.dim2);
+    }
+    else {
+        printf("Invalid shape type.\n");
+        return 1;
+    }
+
+    printf("The area of the %s is %.2f\n", s.type, area);
+
+    return 0;
+}
