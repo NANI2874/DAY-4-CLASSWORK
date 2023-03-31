@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+union HourlyWage {
+    float dollars;
+    int cents;
+};
+
+struct Employee {
+    char name[50];
+    int id;
+    union HourlyWage wage;
+};
+
+int main() {
+    struct Employee emp;
+
+    // Prompt the user to enter employee information
+    printf("Enter employee name: ");
+    scanf("%s", emp.name);
+
+    printf("Enter employee ID: ");
+    scanf("%d", &emp.id);
+
+    printf("Enter hourly wage in dollars: ");
+    scanf("%f", &emp.wage.dollars);
+
+    // Convert hourly wage to cents and store in the union
+    emp.wage.cents = (int)(emp.wage.dollars * 100);
+
+    // Display employee information
+    printf("\nEmployee information:\n");
+    printf("Name: %s\n", emp.name);
+    printf("ID: %d\n", emp.id);
+    printf("Hourly wage: %d cents (%.2f dollars)\n", emp.wage.cents, emp.wage.dollars);
+
+    return 0;
+}
